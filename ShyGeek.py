@@ -43,17 +43,16 @@ class Solution:
         self.shop = shop
 
     def find(self, n, k):
-        afford = []
+        afford = 0
         while k > 0:
-            print("k = ", k)
-            if self.shop.get(n - 1) > k:
-                afford.append(self.shop.get(n - 1))
+            while n > 0:
+                if k >= self.shop.get(n - 1):
+                    k -= self.shop.get(n - 1)
+                    afford += 1
+                    break
+                n -= 1
 
-        print(afford)
-        k -= self.shop.get(n - 1)
-        n -= 1
-
-        return afford.__len__()
+        return afford
 
 
 # {
