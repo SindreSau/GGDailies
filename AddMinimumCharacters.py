@@ -1,16 +1,19 @@
 class Solution:
-    @staticmethod
-    def isPalindrome(s):
-        if s == s[::-1]:
-            return True
-        return False
-
     def addMinChar(self, s):
-        lenRemoved = 0
-        while not self.isPalindrome(s):
-            lenRemoved += 1
-            s = s[:-1]
-        return lenRemoved
+        if s == s[::-1]:
+            return 0
+        i = 0
+        j = len(s) - 1
+        ans = j
+        while i <= j:
+            if s[i] == s[j]:
+                i += 1
+                j -= 1
+            else:
+                ans -= 1
+                i = 0
+                j = ans
+        return len(s) - (ans + 1)
 
 
 # {
