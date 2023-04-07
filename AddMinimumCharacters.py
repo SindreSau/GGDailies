@@ -4,10 +4,11 @@
 # AABCD -> DCBAABCD -> 3
 # ABCDEFGHIJKJIHGFEDCBA -> 0
 # UMUB -> BUMUB -> 1
+# AABBAACBD
 
 
 class Solution:
-    lenStartingPalindrome = 0
+    lenStartingPalindrome = 1
 
     def isPalindrome(self, str1):
         if len(str1) > 1:
@@ -27,33 +28,33 @@ class Solution:
         newStr = str1[:1]
         for i in range(len(str1)):
             if self.isPalindrome(newStr):
-                self.lenStartingPalindrome = len(newStr)
-                print("has palindrome")
                 return True
             else:
-                newStr += str1[i + 1]
+                if i + 1 < len(str1):
+                    newStr += str1[i + 1]
+                    self.lenStartingPalindrome += 1
         return False
 
     def addMinChar(self, str1):
         if self.isPalindrome(str1):
             print("is palindrome")
             return 0
-        if self.hasPalindrome(str1):
-            print("Returning str1 minus lenStartingPalindrome")
+        elif self.hasPalindrome(str1):
+            print("has palindrome")
             return len(str1) - self.lenStartingPalindrome
         else:
             print("is or has no palindrome")
-            count = 0
-            firstLetter = str1[0]
-            for i in range(len(str1)):
-                if str1[i] == firstLetter:
-                    count += 1
-                else:
-                    break
-            if count > 1:
-                return len(str1) - count
-            else:
-                return len(str1) - 1
+            # count = 0
+            # firstLetter = str1[0]
+            # for i in range(len(str1)):
+            #     if str1[i] == firstLetter:
+            #         count += 1
+            #     else:
+            #         break
+            # if count > 1:
+            #     return len(str1) - count
+            # else:
+            return len(str1) - 1
 
 
 # {
