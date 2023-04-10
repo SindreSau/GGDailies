@@ -2,7 +2,7 @@
 
 class Solution:
     def knightInGeekland(self, arr, start):
-        arr.
+        return null
 
 
 # {
