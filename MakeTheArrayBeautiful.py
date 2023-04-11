@@ -2,26 +2,16 @@ from typing import List
 
 
 class Solution:
-    def isBeautiful(self, arr: List[int]) -> bool:
-        for i in range(1, len(arr)):
-            if arr[i - 1] >= 0 > arr[i] or arr[i - 1] < 0 <= arr[i]:
-                return False
-        return True
-
     def makeBeautiful(self, arr: List[int]) -> List[int]:
-        # code here
-        is_beautiful = self.isBeautiful(arr)
-        # print("isBeautiful: ", is_beautiful)
-        # print("arr:", arr)
-        if not is_beautiful:
-            for i in range(1, len(arr)):
-                if arr[i - 1] >= 0 > arr[i] or arr[i - 1] < 0 <= arr[i]:
-                    # print("Deleting ", arr[i - 1], arr[i])
-                    arr.pop(i - 1)
-                    arr.pop(i - 1)
-                    break
-            self.makeBeautiful(arr)
-        return arr
+        stack = []
+        for i in range(len(arr)):
+            if len(stack) == 0:
+                stack.append(arr[i])
+            elif stack[len(stack) - 1] >= 0 > arr[i] or stack[len(stack) - 1] < 0 <= arr[i]:
+                stack.pop(len(stack) - 1)
+            else:
+                stack.append(arr[i])
+        return stack
 
 
 # {
@@ -52,4 +42,8 @@ if __name__ == "__main__":
 1
 28
 186 156 -145 148 52 160 128 -133 86 -199 54 -29 62 116 -37 -137 168 -69 -103 -127 80 58 -161 124 -115 -21 0 -37
+
+1
+41
+-145 -69 56 -123 84 76 -49 -169 -141 -173 -79 -71 82 -87 162 182 -73 -151 -95 -195 10 42 24 -171 184 44 54 -141 110 58 186 -39 -47 -69 -87 148 -111 32 -189 92 32
 """
