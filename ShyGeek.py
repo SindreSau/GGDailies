@@ -2,6 +2,7 @@
 # Driver Code Starts
 # Initial Template for Python 3
 
+
 class Shop:
     chocolates = []
     countOfCalls = 0
@@ -42,13 +43,25 @@ class Solution:
     def __init__(self, shop):
         self.shop = shop
 
+    def indexOfSmallerThanK(self, arr, low, high, kk):
+        ans = -1
+        while high >= low:
+            mid = (high + low) // 2
+            if kk >= arr[mid]:
+                ans = mid
+                low = mid + 1
+            else:
+                high = mid - 1
+        return ans
+
     def find(self, n, k):
         afford = 0
         while k > 0:
-            for i in reversed(range(len(self.shop.chocolates))):
-                # print("k = ", k, " i = ", i)
+            highest_index = self.indexOfSmallerThanK(self.shop.chocolates, 0, n - 1, k)
+            print("highest_index = ", highest_index)
+            for i in reversed(range(highest_index + 1)):
+                print("i = ", i)
                 if k >= self.shop.get(i):
-                    # print("buying ", self.shop.get(i))
                     k -= self.shop.get(i)
                     afford += 1
                     break
@@ -58,6 +71,12 @@ class Solution:
 """
 4 9
 1 2 3 4
+
+5 2
+1 3 5 7 9
+
+5 10
+1 3 5 7 9
 """
 
 # {
