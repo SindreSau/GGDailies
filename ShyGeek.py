@@ -43,29 +43,29 @@ class Solution:
     def __init__(self, shop):
         self.shop = shop
 
-    def indexOfSmallerThanK(self, arr, low, high, kk):
-        ans = -1
-        while high >= low:
-            mid = (high + low) // 2
-            if kk >= arr[mid]:
-                ans = mid
-                low = mid + 1
-            else:
-                high = mid - 1
-        return ans
-
     def find(self, n, k):
-        afford = 0
+        affords = 0
+        low = 0
+        high = n - 1
         while k > 0:
-            highest_index = self.indexOfSmallerThanK(self.shop.chocolates, 0, n - 1, k)
-            print("highest_index = ", highest_index)
-            for i in reversed(range(highest_index + 1)):
-                print("i = ", i)
-                if k >= self.shop.get(i):
-                    k -= self.shop.get(i)
-                    afford += 1
-                    break
-        return afford
+            max_price = 0
+            while high >= low:
+                mid = (low + high) // 2
+                price = self.shop.get(mid)
+                if price > k:
+                    high = mid - 1
+                else:
+                    max_price = price
+                    low = mid + 1
+            if max_price == 0:
+                break
+            # print("max_price = ", max_price)
+            numChocs = k // max_price
+            affords += numChocs
+            k -= numChocs * max_price
+            # print("k = ", k)
+            low = 0
+        return affords
 
 
 """
@@ -77,6 +77,9 @@ class Solution:
 
 5 10
 1 3 5 7 9
+
+3 10
+1 3 4
 """
 
 # {
