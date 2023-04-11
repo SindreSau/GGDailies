@@ -45,20 +45,20 @@ class Solution:
     def find(self, n, k):
         afford = 0
         while k > 0:
-            low = 0
-            high = n - 1
-            while low <= high:
-                mid = (low + high) // 2
-                if self.shop.get(mid) <= k:
-                    low = mid + 1
-                else:
-                    high = mid - 1
-            if low == 0:
-                break
-            k -= self.shop.get(low - 1)
-            afford += 1
-
+            for i in reversed(range(len(self.shop.chocolates))):
+                # print("k = ", k, " i = ", i)
+                if k >= self.shop.get(i):
+                    # print("buying ", self.shop.get(i))
+                    k -= self.shop.get(i)
+                    afford += 1
+                    break
         return afford
+
+
+"""
+4 9
+1 2 3 4
+"""
 
 # {
 # Driver Code Starts.
